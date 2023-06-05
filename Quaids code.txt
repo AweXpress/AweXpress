@@ -1,0 +1,245 @@
+. import excel "C:\Users\USER\Downloads\RICE.xlsx", sheet("Sheet1") firstrow
+
+. egen total = rowtotal(RiceExp WheatExp OthercerealsExp RootandTubersExp)
+
+. 
+. 
+. gen sharesA = RiceExp / total
+(575 missing values generated)
+
+. gen sharesB = WheatExp / total
+(575 missing values generated)
+
+. gen sharesC = OthercerealsExp / total
+(575 missing values generated)
+
+. gen sharesD = RootandTubersExp / total
+(575 missing values generated)
+
+. replace pRice = 10 if pRice == 0
+(1,745 real changes made)
+
+. replace pWheat  = 10 if pWheat == 0
+(1,280 real changes made)
+
+. replace pOthercereals = 10 if pOthercereals == 0
+(2,789 real changes made)
+
+. replace pRootandTubers  = 10 if pRootandTubers == 0
+(1,624 real changes made)
+
+
+.  quaids sharesA sharesB sharesC sharesD, anot(10) prices(pRice pWheat pOthercereals 
+> pRootandTubers) expenditure(TotalExp) demographics(HHsize yearofbirth)
+(575 missing values generated)
+(obs = 3,621)
+
+Calculating NLS estimates...
+Iteration 0:  Residual SS =  371.5572
+Iteration 1:  Residual SS =  361.1963
+Iteration 2:  Residual SS =  308.1181
+Iteration 3:  Residual SS =  305.2038
+Iteration 4:  Residual SS =  303.8727
+Iteration 5:  Residual SS =  302.7868
+Iteration 6:  Residual SS =  301.3361
+Iteration 7:  Residual SS =  300.2038
+Iteration 8:  Residual SS =  299.3599
+Iteration 9:  Residual SS =  298.7817
+Iteration 10:  Residual SS =  298.4531
+Iteration 11:  Residual SS =  298.3626
+Iteration 12:  Residual SS =  297.5761
+Iteration 13:  Residual SS =  296.8401
+Iteration 14:  Residual SS =  246.5925
+Iteration 15:  Residual SS =  245.8071
+Iteration 16:  Residual SS =  239.1981
+Iteration 17:  Residual SS =   238.719
+Iteration 18:  Residual SS =  238.5938
+Iteration 19:  Residual SS =  238.5451
+Iteration 20:  Residual SS =  238.5259
+Iteration 21:  Residual SS =  238.5183
+Iteration 22:  Residual SS =  238.5154
+Iteration 23:  Residual SS =  238.5143
+Iteration 24:  Residual SS =  238.5138
+Iteration 25:  Residual SS =  238.5137
+Iteration 26:  Residual SS =  238.5136
+Iteration 27:  Residual SS =  238.5136
+Iteration 28:  Residual SS =  238.5136
+Iteration 29:  Residual SS =  238.5136
+Iteration 30:  Residual SS =  238.5136
+Calculating FGNLS estimates...
+Iteration 0:  Scaled RSS =  10836.74
+Iteration 1:  Scaled RSS =  10828.04
+Iteration 2:  Scaled RSS =  10826.03
+Iteration 3:  Scaled RSS =  10825.35
+Iteration 4:  Scaled RSS =  10825.14
+Iteration 5:  Scaled RSS =  10825.06
+Iteration 6:  Scaled RSS =  10825.04
+Iteration 7:  Scaled RSS =  10825.03
+Iteration 8:  Scaled RSS =  10825.03
+Iteration 9:  Scaled RSS =  10825.02
+Iteration 10:  Scaled RSS =  10825.02
+Iteration 11:  Scaled RSS =  10825.02
+Iteration 12:  Scaled RSS =  10825.02
+Iteration 13:  Scaled RSS =  10825.02
+Iteration 14:  Scaled RSS =  10825.02
+Iteration 15:  Scaled RSS =  10825.02
+Iteration 16:  Scaled RSS =  10825.02
+Iteration 17:  Scaled RSS =  10825.02
+Iteration 18:  Scaled RSS =  10825.02
+FGNLS iteration 2...
+Iteration 0:  Scaled RSS =   10862.9
+Iteration 1:  Scaled RSS =  10862.88
+Iteration 2:  Scaled RSS =  10862.88
+Iteration 3:  Scaled RSS =  10862.88
+Iteration 4:  Scaled RSS =  10862.88
+Iteration 5:  Scaled RSS =  10862.87
+Iteration 6:  Scaled RSS =  10862.87
+Iteration 7:  Scaled RSS =  10862.87
+Iteration 8:  Scaled RSS =  10862.87
+Iteration 9:  Scaled RSS =  10862.87
+Iteration 10:  Scaled RSS =  10862.87
+Iteration 11:  Scaled RSS =  10862.87
+Iteration 12:  Scaled RSS =  10862.87
+Parameter change         =  1.210e-03
+Covariance matrix change =  2.905e-05
+FGNLS iteration 3...
+Iteration 0:  Scaled RSS =     10863
+Iteration 1:  Scaled RSS =     10863
+Iteration 2:  Scaled RSS =     10863
+Iteration 3:  Scaled RSS =     10863
+Iteration 4:  Scaled RSS =     10863
+Iteration 5:  Scaled RSS =     10863
+Iteration 6:  Scaled RSS =     10863
+Iteration 7:  Scaled RSS =     10863
+Parameter change         =  1.000e-04
+Covariance matrix change =  2.045e-06
+FGNLS iteration 4...
+Iteration 0:  Scaled RSS =     10863
+Iteration 1:  Scaled RSS =     10863
+Iteration 2:  Scaled RSS =     10863
+Iteration 3:  Scaled RSS =     10863
+Parameter change         =  7.755e-06
+Covariance matrix change =  1.546e-07
+
+Quadratic AIDS model
+--------------------
+Number of obs          =       3621
+Number of demographics =          2
+Alpha_0                =         10
+Log-likelihood         =  5884.4453
+
+
+
+. test [eta]_b[eta_HHsize_1], notest accumulate
+
+ ( 1)  [eta]eta_HHsize_1 = 0
+
+. test [eta]_b[eta_HHsize_1], accumulate
+
+ ( 1)  [eta]eta_HHsize_1 = 0
+ ( 2)  [eta]eta_HHsize_1 = 0
+       Constraint 2 dropped
+
+           chi2(  1) =    9.85
+         Prob > chi2 =    0.0017
+
+.  test [eta]_b[eta_HHsize_2], notest accumulate
+
+ ( 1)  [eta]eta_HHsize_1 = 0
+ ( 2)  [eta]eta_HHsize_1 = 0
+ ( 3)  [eta]eta_HHsize_2 = 0
+
+. 
+. test [eta]_b[eta_HHsize_3], notest accumulate
+
+ ( 1)  [eta]eta_HHsize_1 = 0
+ ( 2)  [eta]eta_HHsize_1 = 0
+ ( 3)  [eta]eta_HHsize_2 = 0
+ ( 4)  [eta]eta_HHsize_3 = 0
+
+. 
+. test [eta]_b[eta_HHsize_4], notest accumulate
+
+ ( 1)  [eta]eta_HHsize_1 = 0
+ ( 2)  [eta]eta_HHsize_1 = 0
+ ( 3)  [eta]eta_HHsize_2 = 0
+ ( 4)  [eta]eta_HHsize_3 = 0
+ ( 5)  [eta]eta_HHsize_4 = 0
+
+. 
+. test [eta]_b[eta_yearofbirth_1], notest accumulate
+
+ ( 1)  [eta]eta_HHsize_1 = 0
+ ( 2)  [eta]eta_HHsize_1 = 0
+ ( 3)  [eta]eta_HHsize_2 = 0
+ ( 4)  [eta]eta_HHsize_3 = 0
+ ( 5)  [eta]eta_HHsize_4 = 0
+ ( 6)  [eta]eta_yearofbirth_1 = 0
+
+. 
+. test [eta]_b[eta_yearofbirth_2], notest accumulate
+
+ ( 1)  [eta]eta_HHsize_1 = 0
+ ( 2)  [eta]eta_HHsize_1 = 0
+ ( 3)  [eta]eta_HHsize_2 = 0
+ ( 4)  [eta]eta_HHsize_3 = 0
+ ( 5)  [eta]eta_HHsize_4 = 0
+ ( 6)  [eta]eta_yearofbirth_1 = 0
+ ( 7)  [eta]eta_yearofbirth_2 = 0
+
+. 
+. test [eta]_b[eta_yearofbirth_3], notest accumulate
+
+ ( 1)  [eta]eta_HHsize_1 = 0
+ ( 2)  [eta]eta_HHsize_1 = 0
+ ( 3)  [eta]eta_HHsize_2 = 0
+ ( 4)  [eta]eta_HHsize_3 = 0
+ ( 5)  [eta]eta_HHsize_4 = 0
+ ( 6)  [eta]eta_yearofbirth_1 = 0
+ ( 7)  [eta]eta_yearofbirth_2 = 0
+ ( 8)  [eta]eta_yearofbirth_3 = 0
+
+. 
+. test [eta]_b[eta_yearofbirth_4], notest accumulate
+
+ ( 1)  [eta]eta_HHsize_1 = 0
+ ( 2)  [eta]eta_HHsize_1 = 0
+ ( 3)  [eta]eta_HHsize_2 = 0
+ ( 4)  [eta]eta_HHsize_3 = 0
+ ( 5)  [eta]eta_HHsize_4 = 0
+ ( 6)  [eta]eta_yearofbirth_1 = 0
+ ( 7)  [eta]eta_yearofbirth_2 = 0
+ ( 8)  [eta]eta_yearofbirth_3 = 0
+ ( 9)  [eta]eta_yearofbirth_4 = 0
+
+. 
+. 
+.  test [eta]_b[rho_HHsize], accumulate
+[eta]rho_HHsize not found
+r(111);
+
+.  test [rho]_b[rho_HHsize], accumulate
+
+ ( 1)  [eta]eta_HHsize_1 = 0
+ ( 2)  [eta]eta_HHsize_1 = 0
+ ( 3)  [eta]eta_HHsize_2 = 0
+ ( 4)  [eta]eta_HHsize_3 = 0
+ ( 5)  [eta]eta_HHsize_4 = 0
+ ( 6)  [eta]eta_yearofbirth_1 = 0
+ ( 7)  [eta]eta_yearofbirth_2 = 0
+ ( 8)  [eta]eta_yearofbirth_3 = 0
+ ( 9)  [eta]eta_yearofbirth_4 = 0
+ (10)  [rho]rho_HHsize = 0
+       Constraint 2 dropped
+       Constraint 4 dropped
+       Constraint 6 dropped
+       Constraint 10 dropped
+
+           chi2(  6) =   14.06
+         Prob > chi2 =    0.0290
+
+. estat expenditure e*
+
+. summarize e_1-e_4
+
+
